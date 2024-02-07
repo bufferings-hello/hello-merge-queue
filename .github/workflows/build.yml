@@ -3,7 +3,7 @@ run-name: ${{ github.actor }} is learning merge queue
 
 on:
   pull_request:
-    types: [opened]
+    types: [opened, synchronize]
     branches: [main]
   merge_group:
     types: [checks_requested]
@@ -67,8 +67,6 @@ jobs:
           || needs.job_c.result == 'cancelled'
           || needs.job_d.result == 'failure'
           || needs.job_d.result == 'cancelled'
-        run: |
-          exit 1
-      - run: |
-          echo "ステータスチェックOK"
+        run: exit 1
+      - run: echo "ステータスチェックOK"
 
