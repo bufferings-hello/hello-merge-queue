@@ -31,6 +31,7 @@ jobs:
           echo "マージキューのときだけ実行されるやつ"
           echo "github.ref='${{ github.ref }}'"
           echo "github.sha='${{ github.sha }}'"
+          exit 1
 
   job_c:
     runs-on: ubuntu-latest
