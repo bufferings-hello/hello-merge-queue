@@ -21,6 +21,7 @@ jobs:
           echo "プルリクエストのときだけ実行されるやつ"
           echo "github.ref='${{ github.ref }}'"
           echo "github.sha='${{ github.sha }}'"
+          exit 1
 
   job_b:
     runs-on: ubuntu-latest
