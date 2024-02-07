@@ -20,7 +20,23 @@ jobs:
     timeout-minutes: 5
     if: github.event_name == 'pull_request'
     steps:
+
+      - id: get-pr
+        uses: actions/github-script@v7
+        with:
+          result-encoding: json
+          script: |
+            return (
+              await github.rest.repos.listPullRequestsAssociatedWithCommit({
+                commit_sha: context.sha,
+                owner: context.repo.owner,
+                repo: context.repo.repo,
+              })
+            ).data[0];
+
       - uses: actions/github-script@v7
+        env:
+         PR_NUMBER: ${{ fromJson(steps.get-pr.outputs.result).number }}
         with:
           script: |
             const body = 'プルリクエストのときだけ実行されるジョブ\n'
@@ -31,7 +47,7 @@ jobs:
               + 'github.head_ref=${{ github.head_ref }}\n'
               + '```\n'
             github.rest.issues.createComment({
-              issue_number: context.issue.number,
+              issue_number: provess.env.PR_NUMBER,
               owner: context.repo.owner,
               repo: context.repo.repo,
               body
