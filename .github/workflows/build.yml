@@ -23,17 +23,16 @@ jobs:
       - uses: actions/github-script@v7
         with:
           script: |
+            const body = 'プルリクエストのときだけ実行されるやつ\n'
+              + 'github.ref=${{ github.ref }}\n'
+              + 'github.sha=${{ github.sha }}\n'
+              + 'github.base_ref=${{ github.base_ref }}\n'
+              + 'github.head_ref=${{ github.head_ref }}\n'
             github.rest.issues.createComment({
               issue_number: context.issue.number,
               owner: context.repo.owner,
               repo: context.repo.repo,
-              body: `
-                プルリクエストのときだけ実行されるやつ
-                github.ref='${{ github.ref }}'
-                github.sha='${{ github.sha }}'
-                github.base_ref=${{ github.base_ref }}
-                github.head_ref=${{ github.head_ref }}
-              `
+              body
             })
       - run: exit 1
 
