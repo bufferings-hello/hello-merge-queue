@@ -56,7 +56,19 @@ jobs:
   job_status:
     runs-on: ubuntu-latest
     needs: [job_a, job_b, job_c, job_d]
-    if: ${{ !cancelled() && !failure() }}
+    if: always()
     steps:
+      - if: >-
+          needs.job_a.result == 'failure'
+          || needs.job_a.result == 'cancelled'
+          || needs.job_b.result == 'failure'
+          || needs.job_b.result == 'cancelled'
+          || needs.job_c.result == 'failure'
+          || needs.job_c.result == 'cancelled'
+          || needs.job_d.result == 'failure'
+          || needs.job_d.result == 'cancelled'
+        run: |
+          exit 1
       - run: |
           echo "ステータスチェックOK"
+
