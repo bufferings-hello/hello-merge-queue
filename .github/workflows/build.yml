@@ -31,7 +31,6 @@ jobs:
           echo "マージキューのときだけ実行されるやつ"
           echo "github.ref='${{ github.ref }}'"
           echo "github.sha='${{ github.sha }}'"
-          exit 1
 
   job_c:
     runs-on: ubuntu-latest
@@ -58,14 +57,7 @@ jobs:
     if: always()
     steps:
       - if: >-
-          needs.job_a.result == 'failure'
-          || needs.job_a.result == 'cancelled'
-          || needs.job_b.result == 'failure'
-          || needs.job_b.result == 'cancelled'
-          || needs.job_c.result == 'failure'
-          || needs.job_c.result == 'cancelled'
-          || needs.job_d.result == 'failure'
-          || needs.job_d.result == 'cancelled'
+          contains(needs.*.result, 'failure')
+          || contains(needs.*.result, 'cancelled')
         run: exit 1
       - run: echo "ステータスチェックOK"
-
