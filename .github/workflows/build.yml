@@ -43,6 +43,7 @@ jobs:
     timeout-minutes: 5
     if: github.event_name == 'merge_group'
     steps:
+      - run: printenv
       - id: get-pr
         uses: actions/github-script@v7
         with:
