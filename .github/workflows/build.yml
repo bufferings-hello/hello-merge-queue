@@ -12,7 +12,7 @@ on:
     branches: [main]
 
 permissions:
-  issues: write
+  pull-requests: write
 
 jobs:
   job_a:
