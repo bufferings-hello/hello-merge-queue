@@ -30,7 +30,7 @@ jobs:
               + 'github.sha=${{ github.sha }}\n'
               + 'github.base_ref=${{ github.base_ref }}\n'
               + 'github.head_ref=${{ github.head_ref }}\n'
-              + '```\n'
+              + '```'
             github.rest.issues.createComment({
               issue_number: context.issue.number,
               owner: context.repo.owner,
@@ -52,14 +52,13 @@ jobs:
               + 'github.sha=${{ github.sha }}\n'
               + 'github.base_ref=${{ github.base_ref }}\n'
               + 'github.head_ref=${{ github.head_ref }}\n'
-              + '```\n'
+              + '```'
             github.rest.issues.createComment({
               issue_number: context.ref.split('/')[4].split('-')[1],
               owner: context.repo.owner,
               repo: context.repo.repo,
               body
             })
-      - run: exit 1
 
   job_c:
     runs-on: ubuntu-latest
@@ -89,7 +88,7 @@ jobs:
               + 'github.sha=${{ github.sha }}\n'
               + 'github.base_ref=${{ github.base_ref }}\n'
               + 'github.head_ref=${{ github.head_ref }}\n'
-              + '```\n'
+              + '```'
             github.rest.issues.createComment({
               issue_number: process.env.PR_NUMBER,
               owner: context.repo.owner,
