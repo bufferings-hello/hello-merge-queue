@@ -11,6 +11,9 @@ on:
   push:
     branches: [main]
 
+permissions:
+  contents: write
+
 jobs:
   job_a:
     runs-on: ubuntu-latest
