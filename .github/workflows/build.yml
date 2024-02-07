@@ -14,6 +14,7 @@ on:
 jobs:
   job_a:
     runs-on: ubuntu-latest
+    timeout-minutes: 5
     if: github.event_name == 'pull_request'
     steps:
       - run: |
@@ -23,6 +24,7 @@ jobs:
 
   job_b:
     runs-on: ubuntu-latest
+    timeout-minutes: 5
     if: github.event_name == 'merge_group'
     steps:
       - run: |
@@ -32,6 +34,7 @@ jobs:
 
   job_c:
     runs-on: ubuntu-latest
+    timeout-minutes: 5
     if: github.event_name == 'push'
     steps:
       - run: |
