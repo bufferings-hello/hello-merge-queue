@@ -26,13 +26,15 @@ jobs:
         with:
           result-encoding: json
           script: |
-            return (
+            const res = (
               await github.rest.repos.listPullRequestsAssociatedWithCommit({
                 commit_sha: context.sha,
                 owner: context.repo.owner,
                 repo: context.repo.repo,
               })
             ).data[0];
+            console.log(res);
+            return res;
 
       - uses: actions/github-script@v7
         env:
