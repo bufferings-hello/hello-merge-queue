@@ -40,9 +40,10 @@ jobs:
 
   job_b:
     runs-on: ubuntu-latest
-    timeout-minutes: 5
+    timeout-minutes: 20
     if: github.event_name == 'merge_group'
     steps:
+      - run: sleep 900
       - uses: actions/github-script@v7
         with:
           script: |
